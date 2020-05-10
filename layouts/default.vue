@@ -2,12 +2,12 @@
   <v-app light>
     <v-navigation-drawer v-model="sideNav" app>
       <v-list>
-        <v-list-tile>
-          <v-list-tile-action>
-            <v-icon>{{ account_supervisor }}</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>View Meetups</v-list-tile-content>
-        </v-list-tile>
+        <v-list-item v-for="item in menuItems" :key="item.title">
+          <v-list-item-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>{{ item.title }}</v-list-item-content>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
@@ -19,9 +19,9 @@
       <v-toolbar-title>DevMeetup</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-xs-only">
-        <v-btn text>
-          <v-icon left dark>{{ account_supervisor }}</v-icon> View
-          Meetups</v-btn
+        <v-btn v-for="item in menuItems" :key="item.title" text>
+          <v-icon left dark>{{ item.icon }}</v-icon
+          >{{ item.title }}</v-btn
         >
       </v-toolbar-items>
     </v-app-bar>
@@ -35,12 +35,24 @@
 </template>
 
 <script>
-import { mdiAccountSupervisor } from "@mdi/js";
+import {
+  mdiAccountSupervisor,
+  mdiAccount,
+  mdiFace,
+  mdiLockOpen,
+  mdiMapMarker
+} from "@mdi/js";
 
 export default {
   data: () => ({
-    account_supervisor: mdiAccountSupervisor,
-    sideNav: false
+    sideNav: false,
+    menuItems: [
+      { icon: mdiAccountSupervisor, title: "View Meetups" },
+      { icon: mdiMapMarker, title: "Organize Meetup" },
+      { icon: mdiFace, title: "Profile" },
+      { icon: mdiAccount, title: "Sign-up" },
+      { icon: mdiLockOpen, title: "Sign-in" }
+    ]
   })
 };
 </script>
