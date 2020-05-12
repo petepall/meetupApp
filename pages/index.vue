@@ -8,7 +8,7 @@
         <v-btn large to="/createMeetup" class="info">Organize Meetups</v-btn>
       </v-col>
     </v-row>
-    <Carousel />
+    <TheCarousel />
     <v-row class="mt-2">
       <v-col xs12 class="text-center">
         <p>Join our awesome meetups!</p>
@@ -18,11 +18,11 @@
 </template>
 
 <script>
-import Carousel from "../components/Carousel";
+import TheCarousel from "../components/TheCarousel";
 
 export default {
   components: {
-    Carousel
+    TheCarousel
   }
 };
 </script>
