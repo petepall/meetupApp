@@ -59,5 +59,6 @@ export default {
   color: white;
   font-size: 2rem !important;
   bottom: 50px;
+  padding: 10px;
 }
 </style>
