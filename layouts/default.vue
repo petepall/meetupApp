@@ -10,28 +10,11 @@
 </template>
 
 <script>
-import TheHeader from "../components/TheHeader";
-// import {
-//   mdiAccountSupervisor,
-//   mdiAccount,
-//   mdiFace,
-//   mdiLockOpen,
-//   mdiMapMarker
-// } from "@mdi/js";
+import TheHeader from "@/components/TheHeader";
 
 export default {
   components: {
     TheHeader
   }
-  // data: () => ({
-  //   sideNav: false,
-  //   menuItems: [
-  //     { icon: mdiAccountSupervisor, title: "View Meetups", link: "/meetups" },
-  //     { icon: mdiMapMarker, title: "Organize Meetup", link: "/createMeetup" },
-  //     { icon: mdiFace, title: "Profile", link: "/profile" },
-  //     { icon: mdiAccount, title: "Sign-up", link: "/signUp" },
-  //     { icon: mdiLockOpen, title: "Sign-in", link: "/signIn" }
-  //   ]
-  // })
 };
 </script>
