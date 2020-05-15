@@ -24,23 +24,10 @@
 
 <script>
 export default {
-  data() {
-    return {
-      meetups: [
-        {
-          id: "1",
-          src:
-            "https://www.j1.ie/contentfiles/images/J1/bigstock-NEW-YORK-CITY--SEP--Times-S-26078033.jpg",
-          title: "Meetup in New York"
-        },
-        {
-          id: "2",
-          src:
-            "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fyesofcorsa.com%2Fwp-content%2Fuploads%2F2016%2F03%2F621959_paris.jpg&f=1&nofb=1",
-          title: "Meetup in Paris"
-        }
-      ]
-    };
+  computed: {
+    meetups() {
+      return this.$store.getters.featuredMeetups;
+    }
   },
   methods: {
     onLoadMeetup(id) {

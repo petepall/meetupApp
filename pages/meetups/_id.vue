@@ -4,14 +4,13 @@
       <v-col xs="12">
         <v-card>
           <v-card-title>
-            <h5 class="primary--text">My Meetup</h5>
+            <h5 class="primary--text">{{ meetup.title }}</h5>
           </v-card-title>
-          <v-img
-            src="https://www.j1.ie/contentfiles/images/J1/bigstock-NEW-YORK-CITY--SEP--Times-S-26078033.jpg"
-            height="400px"
-          ></v-img>
+          <v-img :src="meetup.src" height="400px"></v-img>
           <v-card-text>
-            <div class="info--text">17th of July 2017 - New York</div>
+            <div class="info--text">
+              {{ meetup.date }} - Where it takes place.
+            </div>
             <div>
               Lorem ipsum dolor sit amet consectetur, adipisicing elit.
               Provident sit maiores possimus vel odit quidem quam, veniam
@@ -30,7 +29,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  computed: {
+    meetup() {
+      return this.$store.getters.loadedMeetup(this.$route.params.id);
+    }
+  }
+};
 </script>
 
 <style></style>
