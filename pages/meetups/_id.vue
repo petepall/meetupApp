@@ -12,10 +12,7 @@
               {{ meetup.date }} - Where it takes place.
             </div>
             <div>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Provident sit maiores possimus vel odit quidem quam, veniam
-              ratione asperiores. Deserunt quaerat reiciendis veritatis sed
-              libero magni eum iusto aspernatur itaque?
+              {{ meetup.description }}
             </div>
           </v-card-text>
           <v-card-actions>

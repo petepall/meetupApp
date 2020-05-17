@@ -5,42 +5,16 @@ export const state = () => ({
       src:
         "https://www.j1.ie/contentfiles/images/J1/bigstock-NEW-YORK-CITY--SEP--Times-S-26078033.jpg",
       title: "Meetup in New York",
+      description: " New York meetup for Javascript",
       date: "2017-07-17"
     },
     {
       id: "2",
       src:
         "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fyesofcorsa.com%2Fwp-content%2Fuploads%2F2016%2F03%2F621959_paris.jpg&f=1&nofb=1",
-      title: "Meetup in Paris",
+      title: "Paris meeting",
+      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
       date: "2017-07-19"
-    },
-    {
-      id: "3",
-      src:
-        "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fyesofcorsa.com%2Fwp-content%2Fuploads%2F2016%2F03%2F621959_paris.jpg&f=1&nofb=1",
-      title: "Meetup in Paris 2",
-      date: "2017-07-20"
-    },
-    {
-      id: "4",
-      src:
-        "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fyesofcorsa.com%2Fwp-content%2Fuploads%2F2016%2F03%2F621959_paris.jpg&f=1&nofb=1",
-      title: "Meetup in Paris 3",
-      date: "2017-07-21"
-    },
-    {
-      id: "5",
-      src:
-        "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fyesofcorsa.com%2Fwp-content%2Fuploads%2F2016%2F03%2F621959_paris.jpg&f=1&nofb=1",
-      title: "Meetup in Paris 4",
-      date: "2017-07-22"
-    },
-    {
-      id: "6",
-      src:
-        "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fyesofcorsa.com%2Fwp-content%2Fuploads%2F2016%2F03%2F621959_paris.jpg&f=1&nofb=1",
-      title: "Meetup in Paris 5",
-      date: "2017-07-23"
     }
   ],
   user: {
@@ -49,8 +23,25 @@ export const state = () => ({
   }
 });
 
-export const mutations = {};
-export const actions = {};
+export const mutations = {
+  createMeetup(state, payload) {
+    state.loadedMeetups.push(payload);
+  }
+};
+export const actions = {
+  createMeetup({ commit }, payload) {
+    const meetup = {
+      title: payload.title,
+      location: payload.location,
+      src: payload.imageUrl,
+      description: payload.description,
+      date: payload.date,
+      id: "100"
+    };
+    // todo: connect to firebase and store it
+    commit("createMeetup", meetup);
+  }
+};
 export const getters = {
   loadedMeetups(state) {
     return state.loadedMeetups;
