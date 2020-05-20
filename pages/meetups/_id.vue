@@ -9,7 +9,7 @@
           <v-img :src="meetup.src" height="400px"></v-img>
           <v-card-text>
             <div class="info--text">
-              {{ meetup.date }} - Where it takes place.
+              {{ meetup.date }} - {{ meetup.location }}.
             </div>
             <div>
               {{ meetup.description }}

@@ -6,7 +6,8 @@ export const state = () => ({
         "https://www.j1.ie/contentfiles/images/J1/bigstock-NEW-YORK-CITY--SEP--Times-S-26078033.jpg",
       title: "Meetup in New York",
       description: " New York meetup for Javascript",
-      date: "2017-07-17"
+      date: "2017-07-17",
+      location: "New York"
     },
     {
       id: "2",
@@ -14,7 +15,8 @@ export const state = () => ({
         "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fyesofcorsa.com%2Fwp-content%2Fuploads%2F2016%2F03%2F621959_paris.jpg&f=1&nofb=1",
       title: "Paris meeting",
       description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-      date: "2017-07-19"
+      date: "2017-07-19",
+      location: "Paris"
     }
   ],
   user: {
@@ -38,7 +40,7 @@ export const actions = {
       date: payload.date,
       id: "100"
     };
-    // todo: connect to firebase and store it
+    // TODO: connect to firebase and store it
     commit("createMeetup", meetup);
   }
 };

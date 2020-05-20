@@ -64,6 +64,23 @@
           </v-row>
           <v-row>
             <v-col xs12 sm6 offset-sm3>
+              <h4>Choose a Date & Time</h4>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col class="mb-2" xs12 sm6 offset-sm3>
+              <v-date-picker v-model="date"></v-date-picker>
+              <p>{{ date }}</p>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col xs12 sm6 offset-sm3>
+              <v-time-picker v-model="time" format="24hr"></v-time-picker>
+              <p>{{ time }}</p>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col xs12 sm6 offset-sm3>
               <v-btn class="primary" :disabled="!formIsValid" type="submit"
                 >CREATE MEETUP</v-btn
               >
@@ -85,7 +102,9 @@ export default {
     imageUrl: "",
     imageUrlRules: [(v) => !!v || "Image URL is required"],
     description: "",
-    descriptionRules: [(v) => !!v || "Description is required"]
+    descriptionRules: [(v) => !!v || "Description is required"],
+    date: new Date().toISOString().substring(0, 10),
+    time: new Date().toISOString().substring(11, 19) // toLocaleTimeString("nl-BE")
   }),
   computed: {
     formIsValid() {
@@ -95,6 +114,10 @@ export default {
         this.imageUrl !== "" &&
         this.description !== ""
       );
+    },
+    submittableDateTime() {
+      const date = new Date(this.date + "T" + this.time);
+      return date;
     }
   },
   methods: {
@@ -107,7 +130,7 @@ export default {
         location: this.location,
         imageUrl: this.imageUrl,
         description: this.description,
-        date: new Date()
+        date: this.submittableDateTime
       };
       this.$store.dispatch("createMeetup", meetupData);
       this.$router.push("/meetups");
