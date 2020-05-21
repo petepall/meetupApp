@@ -30,7 +30,10 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ["@plugins/vuetify.js"],
+  plugins: [
+    { src: "@/plugins/vuetify.js", ssr: true },
+    { src: "@/plugins/filters/date.js", ssr: true }
+  ],
   /*
    ** Nuxt.js dev-modules
    */
