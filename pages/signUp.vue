@@ -5,7 +5,7 @@
         <v-card>
           <v-card-text>
             <v-container>
-              <form>
+              <form @submit.prevent="onSignup">
                 <v-row>
                   <v-col xs12>
                     <v-text-field
@@ -66,21 +66,31 @@ export default {
     password: "",
     confirmPassword: ""
   }),
+
   computed: {
     comparePasswords() {
       return this.password !== this.confirmPassword
         ? "Passwords do not match"
         : true;
+    },
+    user() {
+      return this.$store.getters.user;
+    }
+  },
+
+  watch: {
+    user(val) {
+      if (val !== null && val !== undefined) {
+        this.$router.push("/");
+      }
     }
   },
 
   methods: {
     onSignup() {
-      // TODO: Vuex
-      console.log({
+      this.$store.dispatch("signUserUp", {
         email: this.email,
-        password: this.password,
-        confirmPassword: this.confirmPassword
+        password: this.password
       });
     }
   }
