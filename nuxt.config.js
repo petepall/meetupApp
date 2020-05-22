@@ -1,4 +1,5 @@
 import colors from "vuetify/es5/util/colors";
+require("dotenv").config();
 
 export default {
   mode: "spa",
@@ -40,12 +41,30 @@ export default {
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
     "@nuxtjs/eslint-module",
-    "@nuxtjs/vuetify"
+    "@nuxtjs/vuetify",
+    ["@nuxtjs/dotenv", { path: "./", filename: ".env" }]
   ],
   /*
    ** Nuxt.js modules
    */
-  modules: [],
+  modules: [
+    [
+      "@nuxtjs/firebase",
+      {
+        config: {
+          apiKey: process.env.APIKEY,
+          authDomain: process.env.AUTHDOMAIN,
+          databaseURL: process.env.DATABASEURL,
+          projectId: process.env.PROJECTID,
+          storageBucket: process.env.STORAGEBUCKET,
+          messagingSenderId: process.env.MESSAGINGSENDERID
+        },
+        services: {
+          auth: true // Just as example. Can be any other service.
+        }
+      }
+    ]
+  ],
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
