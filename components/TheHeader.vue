@@ -38,15 +38,39 @@ import TheNavDrawer from "@/components/TheNavDrawer";
 export default {
   components: { TheNavDrawer },
   data: () => ({
-    sideNav: false,
-    menuItems: [
-      { icon: mdiAccountSupervisor, title: "View Meetups", link: "/meetups" },
-      { icon: mdiMapMarker, title: "Organize Meetup", link: "/createMeetup" },
-      { icon: mdiFace, title: "Profile", link: "/profile" },
-      { icon: mdiAccount, title: "Sign-up", link: "/signUp" },
-      { icon: mdiLockOpen, title: "Sign-in", link: "/signIn" }
-    ]
-  })
+    sideNav: false
+  }),
+
+  computed: {
+    menuItems() {
+      let menuItems = [
+        { icon: mdiAccount, title: "Sign-up", link: "/signUp" },
+        { icon: mdiLockOpen, title: "Sign-in", link: "/signIn" }
+      ];
+      if (this.userIsAuthenticated) {
+        menuItems = [
+          {
+            icon: mdiAccountSupervisor,
+            title: "View Meetups",
+            link: "/meetups"
+          },
+          {
+            icon: mdiMapMarker,
+            title: "Organize Meetup",
+            link: "/createMeetup"
+          },
+          { icon: mdiFace, title: "Profile", link: "/profile" }
+        ];
+      }
+      return menuItems;
+    },
+    userIsAuthenticated() {
+      return (
+        this.$store.getters.user !== null &&
+        this.$store.getters.user !== undefined
+      );
+    }
+  }
 };
 </script>
 
