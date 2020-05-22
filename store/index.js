@@ -1,3 +1,5 @@
+import * as firebase from "firebase";
+
 export const state = () => ({
   loadedMeetups: [
     {
@@ -19,15 +21,15 @@ export const state = () => ({
       location: "Paris"
     }
   ],
-  user: {
-    id: "abcd",
-    registeredMeetups: ["1"]
-  }
+  user: null
 });
 
 export const mutations = {
   createMeetup(state, payload) {
     state.loadedMeetups.push(payload);
+  },
+  setUser(state, payload) {
+    state.user = payload;
   }
 };
 export const actions = {
@@ -40,8 +42,37 @@ export const actions = {
       date: payload.date,
       id: "100"
     };
-    // TODO: connect to firebase and store it
     commit("createMeetup", meetup);
+  },
+  signUserUp({ commit }, payload) {
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(payload.email, payload.password)
+      .then((user) => {
+        const newUser = {
+          id: user.uid,
+          registeredMeetups: []
+        };
+        commit("setUser", newUser);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+  signUserIn({ commit }, payload) {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(payload.email, payload.password)
+      .then((user) => {
+        const newUser = {
+          id: user.uid,
+          registeredMeetups: []
+        };
+        commit("setUser", newUser);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 };
 export const getters = {
@@ -60,5 +91,8 @@ export const getters = {
         return meetup.id === meetupId;
       });
     };
+  },
+  user(state) {
+    return state.user;
   }
 };
