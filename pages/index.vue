@@ -21,6 +21,7 @@
 import TheCarousel from "@/components/TheCarousel";
 
 export default {
+  middleware: ["preload-meetups"],
   components: {
     TheCarousel
   }
