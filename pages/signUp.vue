@@ -1,5 +1,10 @@
 <template>
   <v-container>
+    <v-row v-if="error">
+      <v-col xs12 sm6 offset-sm3>
+        <app-alert :text="error.message" @dismissed="onDismissed"></app-alert>
+      </v-col>
+    </v-row>
     <v-row>
       <v-col xs12 sm6 offset-sm3>
         <v-card>
@@ -75,6 +80,9 @@ export default {
     },
     user() {
       return this.$store.getters.user;
+    },
+    error() {
+      return this.$store.getters.error;
     }
   },
 
@@ -92,6 +100,11 @@ export default {
         email: this.email,
         password: this.password
       });
+    },
+
+    onDismissed() {
+      console.log("Dismissed Alert!");
+      this.$store.dispatch("clearError");
     }
   }
 };
