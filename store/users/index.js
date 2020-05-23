@@ -3,7 +3,10 @@ import getters from "./getters";
 import mutations from "./mutations";
 
 const state = () => ({
-  user: null
+  user: null,
+  loading: false,
+  authError: null,
+  error: ""
 });
 
 export default {
