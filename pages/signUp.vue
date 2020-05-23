@@ -52,7 +52,14 @@
                 </v-row>
                 <v-row>
                   <v-col>
-                    <v-btn type="submit">Sign up</v-btn>
+                    <v-btn type="submit" :disabled="loading" :loading="loading">
+                      Sign up
+                      <template v-slot:loader>
+                        <span class="custom-loader">
+                          <v-icon light>$loading</v-icon>
+                        </span>
+                      </template>
+                    </v-btn>
                   </v-col>
                 </v-row>
               </form>
@@ -83,6 +90,9 @@ export default {
     },
     error() {
       return this.$store.getters.error;
+    },
+    loading() {
+      return this.$store.getters.loading;
     }
   },
 
@@ -103,8 +113,7 @@ export default {
     },
 
     onDismissed() {
-      console.log("Dismissed Alert!");
-      this.$store.dispatch("clearError");
+      this.$store.commit("clearError");
     }
   }
 };
