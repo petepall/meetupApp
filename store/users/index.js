@@ -6,7 +6,7 @@ const state = () => ({
   user: null,
   loading: false,
   authError: null,
-  error: ""
+  error: null
 });
 
 export default {
