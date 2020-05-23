@@ -33,7 +33,8 @@ export default {
    */
   plugins: [
     { src: "@/plugins/vuetify.js", ssr: true },
-    { src: "@/plugins/filters/date.js", ssr: true }
+    { src: "@/plugins/filters/date.js", ssr: true },
+    { src: "@/plugins/globals/globalComponents.js", ssr: true }
   ],
   /*
    ** Nuxt.js dev-modules
