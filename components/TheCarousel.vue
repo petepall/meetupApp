@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col xs12 class="text-sm-center">
+      <v-col xs12 class="text-sm-center centered">
         <v-progress-circular
           v-if="loading"
           indeterminate
