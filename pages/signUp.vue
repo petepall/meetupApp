@@ -44,7 +44,7 @@
                       v-model="confirmPassword"
                       name="confirmPassword"
                       label="Confirm Password"
-                      type="confirmPassword"
+                      type="password"
                       :rules="[comparePasswords]"
                     >
                     </v-text-field>
