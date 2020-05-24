@@ -56,7 +56,7 @@
                       Sign up
                       <template v-slot:loader>
                         <span class="custom-loader">
-                          <v-icon light>$loading</v-icon>
+                          <v-icon light>mdi-reload</v-icon>
                         </span>
                       </template>
                     </v-btn>

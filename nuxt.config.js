@@ -32,7 +32,7 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    { src: "@/plugins/vuetify.js", ssr: true },
+    { src: "@/plugins/vuetify.js", ssr: false },
     { src: "@/plugins/filters/date.js", ssr: true },
     { src: "@/plugins/globals/globalComponents.js", ssr: true },
     { src: "@/plugins/globals/user_auth_check.js", ssr: false }
@@ -43,7 +43,18 @@ export default {
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
     "@nuxtjs/eslint-module",
-    "@nuxtjs/vuetify",
+    [
+      "@nuxtjs/vuetify",
+      {
+        defaultAssets: {
+          font: true,
+          icons: "mdi"
+        },
+        icons: {
+          iconfont: "mdi"
+        }
+      }
+    ],
     ["@nuxtjs/dotenv", { path: "./", filename: ".env" }]
   ],
   /*

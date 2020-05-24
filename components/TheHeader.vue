@@ -16,6 +16,10 @@
           <v-icon left dark>{{ item.icon }}</v-icon
           >{{ item.title }}</v-btn
         >
+        <v-btn v-if="userIsAuthenticated" text>
+          <v-icon left dark>mdi-logout</v-icon>
+          Logout
+        </v-btn>
       </v-toolbar-items>
     </v-app-bar>
     <v-navigation-drawer v-model="sideNav" temporary app>
@@ -25,18 +29,12 @@
 </template>
 
 <script>
-import {
-  mdiAccountSupervisor,
-  mdiAccount,
-  mdiFace,
-  mdiLockOpen,
-  mdiMapMarker
-} from "@mdi/js";
-
 import TheNavDrawer from "@/components/TheNavDrawer";
+import navBarMixin from "@/mixins/navBarMixin";
 
 export default {
   components: { TheNavDrawer },
+  mixins: [navBarMixin],
   data: () => ({
     sideNav: false
   }),
@@ -44,31 +42,25 @@ export default {
   computed: {
     menuItems() {
       let menuItems = [
-        { icon: mdiAccount, title: "Sign-up", link: "/signUp" },
-        { icon: mdiLockOpen, title: "Sign-in", link: "/signIn" }
+        { icon: "mdi-account", title: "Sign-up", link: "/signUp" },
+        { icon: "mdi-lock-open", title: "Sign-in", link: "/signIn" }
       ];
       if (this.userIsAuthenticated) {
         menuItems = [
           {
-            icon: mdiAccountSupervisor,
+            icon: "mdi-account-supervisor",
             title: "View Meetups",
             link: "/meetups"
           },
           {
-            icon: mdiMapMarker,
+            icon: "mdi-map-marker",
             title: "Organize Meetup",
             link: "/createMeetup"
           },
-          { icon: mdiFace, title: "Profile", link: "/profile" }
+          { icon: "mdi-face", title: "Profile", link: "/profile" }
         ];
       }
       return menuItems;
-    },
-    userIsAuthenticated() {
-      return (
-        this.$store.getters.user !== null &&
-        this.$store.getters.user !== undefined
-      );
     }
   }
 };
