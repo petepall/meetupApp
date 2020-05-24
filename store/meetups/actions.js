@@ -16,7 +16,8 @@ export default {
             title: obj[key].title,
             description: obj[key].description,
             src: obj[key].src,
-            date: obj[key].date
+            date: obj[key].date,
+            creatorId: obj[key].creatorId
           });
         }
         commit("setLoadedMeetups", meetups);
@@ -28,13 +29,14 @@ export default {
       });
   },
 
-  createMeetup({ commit }, payload) {
+  createMeetup({ commit, getters }, payload) {
     const meetup = {
       title: payload.title,
       location: payload.location,
       src: payload.imageUrl,
       description: payload.description,
-      date: payload.date.toISOString()
+      date: payload.date.toISOString(),
+      creatorId: getters.user.id
     };
 
     firebase
