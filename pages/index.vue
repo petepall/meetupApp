@@ -9,7 +9,7 @@
       </v-col>
     </v-row>
     <TheCarousel />
-    <v-row class="mt-2">
+    <v-row class="mt-2" v-if="!loading">
       <v-col xs12 class="text-center">
         <p>Join our awesome meetups!</p>
       </v-col>
@@ -24,6 +24,11 @@ export default {
   middleware: ["preload-meetups"],
   components: {
     TheCarousel
+  },
+  computed: {
+    loading() {
+      return this.$store.getters.loading;
+    }
   }
 };
 </script>
