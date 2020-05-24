@@ -91,6 +91,7 @@
     </v-row>
   </v-container>
 </template>
+
 <script>
 export default {
   data: () => ({
@@ -106,6 +107,7 @@ export default {
     date: new Date().toISOString().substring(0, 10),
     time: new Date().toISOString().substring(11, 19) // toLocaleTimeString("nl-BE")
   }),
+  middleware: ["auth-guard"],
   computed: {
     formIsValid() {
       return (

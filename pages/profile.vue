@@ -36,6 +36,8 @@
 export default {
   data: () => ({}),
 
+  middleware: ["auth-guard"],
+
   computed: {
     user() {
       return this.$store.getters.user;

@@ -44,8 +44,8 @@ export default {
         commit("setError", error);
       });
   },
-  setUser({ commit }, payload) {
-    commit("setUser", payload);
+  autoSignIn({ commit }, payload) {
+    commit("setUser", { id: payload.uid, registeredMeetups: [] });
   },
   signUserOut({ commit }) {
     firebase
