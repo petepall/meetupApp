@@ -6,6 +6,11 @@ export const navBarMixin = {
         this.$store.getters.user !== undefined
       );
     }
+  },
+  methods: {
+    onLogout() {
+      this.$store.dispatch("logout");
+    }
   }
 };
 

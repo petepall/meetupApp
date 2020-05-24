@@ -47,20 +47,13 @@ export default {
   autoSignIn({ commit }, payload) {
     commit("setUser", { id: payload.uid, registeredMeetups: [] });
   },
-  signUserOut({ commit }) {
+  logout({ commit }) {
     firebase
       .auth()
       .signOut()
-      .then((user) => {
-        console.log("User logged out");
-        commit("setLoading", false);
-        commit("setUser", user);
+      .then(() => {
+        commit("setUser", null);
         this.$router.push("/");
-      })
-      .catch((error) => {
-        console.log(error);
-        commit("setLoading", false);
-        commit("setError", error);
       });
   }
 };

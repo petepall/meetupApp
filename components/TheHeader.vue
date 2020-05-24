@@ -16,7 +16,7 @@
           <v-icon left dark>{{ item.icon }}</v-icon
           >{{ item.title }}</v-btn
         >
-        <v-btn v-if="userIsAuthenticated" text>
+        <v-btn v-if="userIsAuthenticated" @click="onLogout" text>
           <v-icon left dark>mdi-logout</v-icon>
           Logout
         </v-btn>

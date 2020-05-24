@@ -6,7 +6,7 @@
       </v-list-item-action>
       <v-list-item-content>{{ item.title }}</v-list-item-content>
     </v-list-item>
-    <v-list-item v-if="userIsAuthenticated">
+    <v-list-item v-if="userIsAuthenticated" @click="onLogout">
       <v-list-item-action>
         <v-icon>mdi-logout</v-icon>
       </v-list-item-action>
