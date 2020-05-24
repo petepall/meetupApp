@@ -25,7 +25,12 @@ export default {
     commit("clearError");
     firebase
       .auth()
-      .signInWithEmailAndPassword(payload.email, payload.password)
+      .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+      .then(() => {
+        return firebase
+          .auth()
+          .signInWithEmailAndPassword(payload.email, payload.password);
+      })
       .then((user) => {
         commit("setLoading", false);
         const newUser = {
@@ -35,6 +40,25 @@ export default {
         commit("setUser", newUser);
       })
       .catch((error) => {
+        commit("setLoading", false);
+        commit("setError", error);
+      });
+  },
+  setUser({ commit }, payload) {
+    commit("setUser", payload);
+  },
+  signUserOut({ commit }) {
+    firebase
+      .auth()
+      .signOut()
+      .then((user) => {
+        console.log("User logged out");
+        commit("setLoading", false);
+        commit("setUser", user);
+        this.$router.push("/");
+      })
+      .catch((error) => {
+        console.log(error);
         commit("setLoading", false);
         commit("setError", error);
       });
