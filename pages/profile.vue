@@ -2,6 +2,10 @@
   <p>Profile page</p>
 </template>
 
-<script></script>
+<script>
+export default {
+  middleware: ["auth-guard"]
+};
+</script>
 
 <style></style>
