@@ -46,7 +46,7 @@ export default {
 
     storageRef
       .put(payload.image)
-      .then((uploadTask) => {
+      .then(() => {
         // file uploaded
         return storageRef.getDownloadURL();
       })
@@ -63,7 +63,7 @@ export default {
         commit("createMeetup", meetup);
         return dbRef.set(meetup);
       })
-      .then((data) => {
+      .then(() => {
         console.log("meeting created");
       })
       .catch((error) => {
