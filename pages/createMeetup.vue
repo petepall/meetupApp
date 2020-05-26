@@ -34,19 +34,17 @@
           </v-row>
           <v-row>
             <v-col xs12 sm6 offset-sm3>
-              <v-text-field
-                id="image-url"
-                v-model="imageUrl"
-                :rules="imageUrlRules"
-                name="imageUrl"
-                label="Image URL"
-                required
-              ></v-text-field>
+              <v-file-input
+                ref="fileInput"
+                accept="image/*"
+                label="File input"
+                @change="onFilePicked"
+              ></v-file-input>
             </v-col>
           </v-row>
           <v-row>
             <v-col xs12 sm6 offset-sm3>
-              <img :src="imageUrl" alt="Location image" class="image" />
+              <img :src="imageUrl" alt="" class="image" />
             </v-col>
           </v-row>
           <v-row>
@@ -105,7 +103,8 @@ export default {
     description: "",
     descriptionRules: [(v) => !!v || "Description is required"],
     date: new Date().toISOString().substring(0, 10),
-    time: new Date().toISOString().substring(11, 19) // toLocaleTimeString("nl-BE")
+    time: new Date().toISOString().substring(11, 19), // toLocaleTimeString("nl-BE")
+    image: null
   }),
   middleware: ["auth-guard"],
   computed: {
@@ -136,6 +135,27 @@ export default {
       };
       this.$store.dispatch("createMeetup", meetupData);
       this.$router.push("/meetups");
+    },
+    onFilePicked() {
+      if (
+        typeof event.target.files !== "undefined" &&
+        event.target.files.length !== 0
+      ) {
+        const files = event.target.files;
+        const filename = files[0].name;
+        if (filename.lastIndexOf(".") <= 0) {
+          return alert("Please add a valid file!");
+        }
+        const fileReader = new FileReader();
+        fileReader.addEventListener("load", () => {
+          this.imageUrl = fileReader.result;
+        });
+        fileReader.readAsDataURL(files[0]);
+        this.image = files[0];
+      } else {
+        this.imageUrl = "";
+        this.image = null;
+      }
     }
   }
 };
