@@ -34,6 +34,7 @@
 import { mdiArrowRightCircle } from "@mdi/js";
 
 export default {
+  middleware: ["preload-meetups"],
   data: () => ({
     arrow: mdiArrowRightCircle
   }),
