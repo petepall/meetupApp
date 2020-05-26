@@ -35,6 +35,7 @@
           <v-row>
             <v-col xs12 sm6 offset-sm3>
               <v-file-input
+                id="image"
                 ref="fileInput"
                 accept="image/*"
                 label="File input"
@@ -42,7 +43,7 @@
               ></v-file-input>
             </v-col>
           </v-row>
-          <v-row>
+          <v-row v-if="isFileAvailable">
             <v-col xs12 sm6 offset-sm3>
               <img :src="imageUrl" alt="" class="image" />
             </v-col>
@@ -70,8 +71,6 @@
               <v-date-picker v-model="date"></v-date-picker>
               <p>{{ date }}</p>
             </v-col>
-          </v-row>
-          <v-row>
             <v-col xs12 sm6 offset-sm3>
               <v-time-picker v-model="time" format="24hr"></v-time-picker>
               <p>{{ time }}</p>
@@ -99,7 +98,7 @@ export default {
     location: "",
     locationRules: [(v) => !!v || "Location is required"],
     imageUrl: "",
-    imageUrlRules: [(v) => !!v || "Image URL is required"],
+    imageRules: [(v) => !!v || "Image is required"],
     description: "",
     descriptionRules: [(v) => !!v || "Description is required"],
     date: new Date().toISOString().substring(0, 10),
@@ -119,17 +118,20 @@ export default {
     submittableDateTime() {
       const date = new Date(this.date + "T" + this.time);
       return date;
+    },
+    isFileAvailable() {
+      return this.image !== null;
     }
   },
   methods: {
     onCreateMeetup() {
-      if (!this.formIsValid) {
+      if (!this.formIsValid || !this.image) {
         return;
       }
       const meetupData = {
         title: this.title,
         location: this.location,
-        imageUrl: this.imageUrl,
+        image: this.image,
         description: this.description,
         date: this.submittableDateTime
       };
