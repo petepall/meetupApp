@@ -1,4 +1,5 @@
 import firebase from "firebase/app";
+import "firebase/storage";
 
 export default {
   loadMeetups({ commit }) {
@@ -30,25 +31,43 @@ export default {
   },
 
   createMeetup({ commit, getters }, payload) {
-    const meetup = {
-      title: payload.title,
-      location: payload.location,
-      src: payload.imageUrl,
-      description: payload.description,
-      date: payload.date.toISOString(),
-      creatorId: getters.user.id
-    };
-
-    firebase
+    // image is passed as file, need to upload it and then store the imageUrl
+    const dbRef = firebase
       .database()
       .ref("meetups")
-      .push(meetup)
+      .push();
+    const key = dbRef.key;
+    const filename = payload.image.name;
+    const ext = filename.slice(filename.lastIndexOf("."));
+    const storageRef = firebase
+      .storage()
+      .ref("meetups")
+      .child(key + "." + ext);
+
+    storageRef
+      .put(payload.image)
+      .then((uploadTask) => {
+        // file uploaded
+        return storageRef.getDownloadURL();
+      })
+      .then((downloadUrl) => {
+        const meetup = {
+          title: payload.title,
+          location: payload.location,
+          description: payload.description,
+          date: payload.date.toISOString(),
+          id: key,
+          creatorId: getters.user.id,
+          src: downloadUrl
+        };
+        commit("createMeetup", meetup);
+        return dbRef.set(meetup);
+      })
       .then((data) => {
-        const key = data.key;
-        commit("createMeetup", { ...meetup, id: key });
+        console.log("meeting created");
       })
       .catch((error) => {
-        console.log(error);
+        console.error("error: " + error);
       });
   }
 };
