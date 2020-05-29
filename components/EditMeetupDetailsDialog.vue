@@ -80,8 +80,6 @@ export default {
         title: this.editedTitle,
         description: this.editedDescription
       });
-      this.meetup.description = this.editedDescription;
-      this.meetup.title = this.editedTitle;
       this.editDialog = false;
     },
 

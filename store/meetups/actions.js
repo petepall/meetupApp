@@ -92,7 +92,7 @@ export default {
       .update(updateObj)
       .then(() => {
         commit("setLoading", false);
-        commit("updateMeetup", payload);
+        commit("updateMeetupData", payload);
       })
       .catch((error) => {
         console.log(error);

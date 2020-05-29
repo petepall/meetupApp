@@ -25,6 +25,10 @@
           <v-card-text>
             <div class="info--text">
               {{ meetup.date | date }} - {{ meetup.location }}.
+              <div>
+                <editMeetupDateDialog :meetup="meetup" v-if="userIsCreator" />
+                <editMeetupTimeDialog :meetup="meetup" v-if="userIsCreator" />
+              </div>
             </div>
             <div>
               {{ meetup.description }}
@@ -42,14 +46,15 @@
 
 <script>
 import editMeetupDetailsDialog from "@/components/EditMeetupDetailsDialog.vue";
+import editMeetupDateDialog from "@/components/EditMeetupDateDialog.vue";
+import editMeetupTimeDialog from "@/components/EditMeetupTimeDialog.vue";
 
 export default {
   middleware: ["preload-meetups"],
-  components: { editMeetupDetailsDialog },
-  data() {
-    return {
-      componentKey: 0
-    };
+  components: {
+    editMeetupDetailsDialog,
+    editMeetupDateDialog,
+    editMeetupTimeDialog
   },
   computed: {
     meetup() {
