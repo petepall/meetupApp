@@ -1,5 +1,5 @@
 <template>
-  <v-container :key="componentKey">
+  <v-container>
     <v-row v-if="loading">
       <v-col xs12 class="text-sm-center centered">
         <v-progress-circular
@@ -36,7 +36,10 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn class="primary">Register</v-btn>
+            <registerDialog
+              v-if="userIsAuthenticated && !userIsCreator"
+              :meetup-id="meetup.id"
+            />
           </v-card-actions>
         </v-card>
       </v-col>
@@ -48,13 +51,15 @@
 import editMeetupDetailsDialog from "@/components/EditMeetupDetailsDialog.vue";
 import editMeetupDateDialog from "@/components/EditMeetupDateDialog.vue";
 import editMeetupTimeDialog from "@/components/EditMeetupTimeDialog.vue";
+import registerDialog from "@/components/RegisterDialog.vue";
 
 export default {
   middleware: ["preload-meetups"],
   components: {
     editMeetupDetailsDialog,
     editMeetupDateDialog,
-    editMeetupTimeDialog
+    editMeetupTimeDialog,
+    registerDialog
   },
   computed: {
     meetup() {
