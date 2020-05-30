@@ -1,5 +1,5 @@
 <template>
-  <v-app light>
+  <v-app>
     <TheHeader />
     <v-content app>
       <nuxt />
@@ -15,6 +15,14 @@ import TheHeader from "@/components/TheHeader";
 export default {
   components: {
     TheHeader
+  },
+
+  data: () => ({
+    setTheme: true
+  }),
+
+  created() {
+    this.$vuetify.theme.dark = this.setTheme;
   }
 };
 </script>
